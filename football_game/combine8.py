@@ -5,6 +5,10 @@ from pygame import mixer
 # initialize the pygame
 pygame.init()
 clock = pygame.time.Clock()
+# creating the screen.
+screen = pygame.display.set_mode((800, 600))
+# background
+background = pygame.image.load('court.png')
 # background sound
 mixer.music.load('music.mp3')
 mixer.music.play(-1)
@@ -12,48 +16,7 @@ mixer.music.play(-1)
 pygame.display.set_caption("Football")
 icon = pygame.image.load('football.png')
 pygame.display.set_icon(icon)
-# creating the screen.
-screen = pygame.display.set_mode((800, 600))
-
-
-# welcome text.
-def welcome():
-    football_font = pygame.font.Font('freesansbold.ttf', 60)
-    welcome_font = pygame.font.Font('freesansbold.ttf', 60)
-    football_text = football_font.render("FOOTBALL", True, (25, 255, 225))
-    welcome_text = welcome_font.render("Welcome to the game", True, (25, 255, 225))
-    screen.blit(football_text, (220, 100))
-    screen.blit(welcome_text, (100, 200))
-
-
-def main_menu():
-    click = False
-    start = True
-    startImg = pygame.image.load('start1.jpg')
-    while start:
-        screen.blit(startImg, (0, 0))
-        welcome()
-        mx, my = pygame.mouse.get_pos()
-        click_button = pygame.Rect(290, 300, 200, 50)
-        if click_button.collidepoint((mx, my)):
-            if click:
-                game()
-        click_font = pygame.font.Font('freesansbold.ttf', 50)
-        pygame.draw.rect(screen, (0, 0, 0,), click_button)
-        click_text = click_font.render("click", True, (25, 255, 225))
-        screen.blit(click_text, (290, 300))
-        click = False
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                start = False
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                if event.button == 1:
-                    click = True
-        pygame.display.update()
-        clock.tick(70)
-
-
-def game():
+def van():
     # Creating the ball.
     ballImg = pygame.image.load('football.png')
     ballX = 384
@@ -83,7 +46,6 @@ def game():
     again_font = pygame.font.Font('freesansbold.ttf', 40)
 
     startImg = pygame.image.load("start1.jpg")
-    background = pygame.image.load('court.png')
 
     def welcome():
         football_font = pygame.font.Font('freesansbold.ttf', 60)
@@ -133,7 +95,7 @@ def game():
     # game loop
     touch = 0
     start = True
-    space = False
+    space=False
     while start:
         # background Image
         screen.blit(background, (0, 0))
@@ -142,14 +104,15 @@ def game():
                 start = False
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
-                    space = True
+                    space=True
                     angle_change_x = angle
-                if space == True:
+                if space==True:
                     if event.key == pygame.K_SPACE:
                         ball_state = "shoot"
                         shoot_ball(384, 520)
                         ball_sound = mixer.Sound('kick.mp3')
                         ball_sound.play()
+
 
         # For arrow to rotate.
         angle = angle_change + angle
@@ -164,8 +127,8 @@ def game():
             touch += 1
             ballY = 520
             ballX = 385
-            ball_state = "ready"
-        if ball_state == "shoot":
+            ball_state="ready"
+        if ball_state =="shoot":
             shoot_ball(ballX, ballY)
             if angle_change_x <= -40 and angle_change_x >= -60:
                 ballY -= 6
@@ -227,6 +190,5 @@ def game():
             again()
         clock.tick(70)
         pygame.display.update()
-main_menu()
-
+van()
 

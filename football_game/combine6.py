@@ -1,7 +1,6 @@
 import pygame
 import math
 from pygame import mixer
-
 # initialize the pygame
 pygame.init()
 clock = pygame.time.Clock()
@@ -14,9 +13,7 @@ icon = pygame.image.load('football.png')
 pygame.display.set_icon(icon)
 # creating the screen.
 screen = pygame.display.set_mode((800, 600))
-
-
-# welcome text.
+#welcome text.
 def welcome():
     football_font = pygame.font.Font('freesansbold.ttf', 60)
     welcome_font = pygame.font.Font('freesansbold.ttf', 60)
@@ -25,7 +22,6 @@ def welcome():
     screen.blit(football_text, (220, 100))
     screen.blit(welcome_text, (100, 200))
 
-
 def main_menu():
     click = False
     start = True
@@ -33,26 +29,24 @@ def main_menu():
     while start:
         screen.blit(startImg, (0, 0))
         welcome()
-        mx, my = pygame.mouse.get_pos()
-        click_button = pygame.Rect(290, 300, 200, 50)
-        if click_button.collidepoint((mx, my)):
+        mx,my=pygame.mouse.get_pos()
+        click_button=pygame.Rect(290,300,200,50)
+        if click_button.collidepoint((mx,my)):
             if click:
                 game()
         click_font = pygame.font.Font('freesansbold.ttf', 50)
-        pygame.draw.rect(screen, (0, 0, 0,), click_button)
+        pygame.draw.rect(screen,(0,0,0,),click_button)
         click_text = click_font.render("click", True, (25, 255, 225))
         screen.blit(click_text, (290, 300))
-        click = False
+        click=False
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                start = False
+               start=False
             if event.type == pygame.MOUSEBUTTONDOWN:
-                if event.button == 1:
-                    click = True
+                if event.button==1:
+                    click=True
         pygame.display.update()
         clock.tick(70)
-
-
 def game():
     # Creating the ball.
     ballImg = pygame.image.load('football.png')
@@ -133,7 +127,7 @@ def game():
     # game loop
     touch = 0
     start = True
-    space = False
+    space=False
     while start:
         # background Image
         screen.blit(background, (0, 0))
@@ -142,14 +136,15 @@ def game():
                 start = False
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
-                    space = True
+                    space=True
                     angle_change_x = angle
-                if space == True:
+                if space==True:
                     if event.key == pygame.K_SPACE:
                         ball_state = "shoot"
                         shoot_ball(384, 520)
                         ball_sound = mixer.Sound('kick.mp3')
                         ball_sound.play()
+
 
         # For arrow to rotate.
         angle = angle_change + angle
@@ -164,8 +159,8 @@ def game():
             touch += 1
             ballY = 520
             ballX = 385
-            ball_state = "ready"
-        if ball_state == "shoot":
+            ball_state="ready"
+        if ball_state =="shoot":
             shoot_ball(ballX, ballY)
             if angle_change_x <= -40 and angle_change_x >= -60:
                 ballY -= 6
@@ -228,5 +223,30 @@ def game():
         clock.tick(70)
         pygame.display.update()
 main_menu()
-
+def exit():
+    def main_menu():
+        click = False
+        start = True
+        startImg = pygame.image.load('start1.jpg')
+        while start:
+            screen.blit(startImg, (0, 0))
+            welcome()
+            mx, my = pygame.mouse.get_pos()
+            click_button = pygame.Rect(290, 300, 200, 50)
+            if click_button.collidepoint((mx, my)):
+                if click:
+                    game()
+            click_font = pygame.font.Font('freesansbold.ttf', 50)
+            pygame.draw.rect(screen, (0, 0, 0,), click_button)
+            click_text = click_font.render("click", True, (25, 255, 225))
+            screen.blit(click_text, (290, 300))
+            click = False
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    start = False
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    if event.button == 1:
+                        click = True
+            pygame.display.update()
+            clock.tick(70)
 
