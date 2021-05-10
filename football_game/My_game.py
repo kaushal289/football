@@ -9,7 +9,7 @@ screen = pygame.display.set_mode((800, 600))
 background = pygame.image.load("court.png")
 # Caption and icon
 pygame.display.set_caption("Football")
-icon = pygame.image.load('football-ball.png')
+icon = pygame.image.load('football.png')
 pygame.display.set_icon(icon)
 # For creating the ball.
 ballImg = pygame.image.load('football.png')

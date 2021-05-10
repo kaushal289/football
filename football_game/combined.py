@@ -229,4 +229,3 @@ def game():
         pygame.display.update()
 main_menu()
 
-

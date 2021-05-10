@@ -13,10 +13,10 @@ mixer.music.load('music.mp3')
 mixer.music.play(-1)
 # Caption and icon
 pygame.display.set_caption("Football")
-icon = pygame.image.load('football-ball.png')
+icon = pygame.image.load('football.png')
 pygame.display.set_icon(icon)
 # player
-playerImg = pygame.image.load('football-ball.png')
+playerImg = pygame.image.load('football.png')
 playerX = 70
 playerY = 550
 playerX_change = 0
